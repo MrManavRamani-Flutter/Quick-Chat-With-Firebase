@@ -33,7 +33,7 @@ A new Flutter project.
 
 
 ## Coding Steps :
-    ## Step 01 : { Splash Screen Code or design }
+## Step 01 :  Splash Screen Code or design 
             import 'package:flutter/material.dart';
             import 'package:quick_chat/module/views/screens/home_screen.dart';
             import 'dart:async';
