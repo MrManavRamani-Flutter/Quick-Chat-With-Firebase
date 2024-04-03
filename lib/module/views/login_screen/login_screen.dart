@@ -1,0 +1,127 @@
+import 'package:flutter/material.dart';
+
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.black, Colors.lightBlueAccent],
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Icon(Icons.chat, size: 60.0, color: Colors.white),
+            const Text(
+              'Quick Chat',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 32.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 45.0),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: 'Enter your email',
+                hintStyle: const TextStyle(color: Colors.white),
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                prefixIcon: const Icon(Icons.email, color: Colors.white),
+              ),
+              style: const TextStyle(color: Colors.white),
+            ),
+            const SizedBox(height: 16.0),
+            TextFormField(
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: 'Enter your password',
+                hintStyle: const TextStyle(color: Colors.white),
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                prefixIcon: const Icon(Icons.lock, color: Colors.white),
+              ),
+              style: const TextStyle(color: Colors.white),
+            ),
+            const SizedBox(height: 24.0),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+              child: const Text(
+                'Login',
+                style: TextStyle(fontSize: 18.0, color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, 'signup');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+              child: const Text(
+                'Sign Up',
+                style: TextStyle(fontSize: 18.0, color: Colors.black),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: Colors.white),
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.g_mobiledata_outlined,
+                      color: Colors.white, size: 34.0),
+                  SizedBox(width: 8.0),
+                  Text(
+                    'Sign in with Google',
+                    style: TextStyle(fontSize: 18.0, color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "514319943676",
+    "project_id": "quick-chat-95ddb",
+    "storage_bucket": "quick-chat-95ddb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514319943676:android:be2b6de3df8e88c8901479",
+        "android_client_info": {
+          "package_name": "com.example.quick_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3aIgP9vFlkvduiVXsGDSVO5aEOX9UHQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
