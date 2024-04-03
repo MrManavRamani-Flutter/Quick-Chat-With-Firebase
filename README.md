@@ -13,8 +13,8 @@ A new Flutter project.
             |       |---> ## modules/
             |       |            
             |       |---------> ## views/
-            |       |                |
-        |   |                        |----> ## Login_screen/
+            |                        |
+            |                        |----> ## Login_screen/
             |                        |           |
             |                        |           |----> ## login_screen.dart
             |                        |           |----> ## signup_screen.dart
