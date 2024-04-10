@@ -1,10 +1,37 @@
-    # quick_chat
+### quick_chat
 
 A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+## Step 01 :
+    ##create Structure of app 
+        -## lib/
+            |
+            |---->## module/
+            |       |
+            |       |---> ## modules/
+            |       |            
+            |       |---------> ## views/
+            |                        |
+            |                        |----> ## Login_screen/
+            |                        |           |
+            |                        |           |----> ## login_screen.dart
+            |                        |           |----> ## signup_screen.dart
+            |                        |
+            |                        |----> ## Screens/
+            |                        |            |
+            |                        |            |----> ## home_screen.dart
+            |                        |
+            |                        |----> ## Welcome/
+            |                                    |
+            |                                    |----> ## splash_screen.dart
+            |                
+            |------> ## firebase_options.dart                
+            |
+            |------> ## main.dart
+
+
 
 A few resources to get you started if this is your first Flutter project:
 
