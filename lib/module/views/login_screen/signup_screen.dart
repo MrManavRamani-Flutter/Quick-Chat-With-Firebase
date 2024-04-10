@@ -97,6 +97,23 @@ class SignUpScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, 'login');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+              child: const Text(
+                'Login',
+                style: TextStyle(fontSize: 18.0, color: Colors.black),
+              ),
+            ),
+            const SizedBox(height: 16.0),
             OutlinedButton(
               onPressed: () {},
               style: OutlinedButton.styleFrom(
