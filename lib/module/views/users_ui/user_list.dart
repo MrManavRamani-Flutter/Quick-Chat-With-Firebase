@@ -15,14 +15,14 @@ class ProfileAvatar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: Colors.greenAccent,
+        borderRadius: BorderRadius.circular(35.0),
+        color: Colors.blueAccent.withOpacity(0.3),
       ),
       child: Row(
         children: [
           CircleAvatar(
             radius: 30.0,
-            backgroundImage: NetworkImage(imageUrl),
+            child: Image(image: AssetImage(imageUrl)),
           ),
           const SizedBox(width: 15.0),
           Text(
