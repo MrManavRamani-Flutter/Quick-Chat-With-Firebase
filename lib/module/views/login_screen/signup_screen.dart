@@ -31,12 +31,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       await FirebaseFirestore.instance.collection('users').doc(userId).set({
         'username': usernameController.text.trim(),
         'email': emailController.text.trim(),
-        'createdAt': timestamp, // Store the creation timestamp
+        'createdAt': timestamp,
         // You shouldn't store the password in plain text, it's just for demonstration
         'password': passwordController.text.trim(),
         // You can add more fields as needed
       });
-
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Signup Successfully....')),
+      );
       Navigator.of(context).pushNamed('login');
     } catch (e) {
       print('Signup error: $e');
@@ -47,7 +49,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   // this code for authentication insert data to firebase database :
-
   // void _signUp(BuildContext context) async {
   //   try {
   //     UserCredential userCredential =

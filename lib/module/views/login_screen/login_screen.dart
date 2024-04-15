@@ -1,7 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +40,7 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 45.0),
             TextFormField(
+              controller: emailController,
               decoration: InputDecoration(
                 hintText: 'Enter your email',
                 hintStyle: const TextStyle(color: Colors.white70),
@@ -50,6 +60,7 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             TextFormField(
+              controller: passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 hintText: 'Enter your password',
@@ -69,9 +80,48 @@ class LoginPage extends StatelessWidget {
               style: const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 24.0),
+            // login button ........
             ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/');
+              onPressed: () async {
+                try {
+                  // Retrieve user input
+                  String email = emailController.text.trim();
+                  String password = passwordController.text.trim();
+
+                  // Query Firestore for a user with the provided email and password
+                  QuerySnapshot<Map<String, dynamic>> snapshot =
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .where('email', isEqualTo: email)
+                          .where('password', isEqualTo: password)
+                          .get();
+
+                  // Check if there's a matching user
+                  if (snapshot.docs.isNotEmpty) {
+                    // Navigate to home screen or any other screen after successful login
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('login successfully....')),
+                    );
+                    emailController.clear();
+                    passwordController.clear();
+                    Navigator.pushReplacementNamed(context, '/');
+                  } else {
+                    // If no matching user is found, display an error message
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Invalid email or password!!!!')),
+                    );
+                    emailController.clear();
+                    passwordController.clear();
+                  }
+                } catch (e) {
+                  print('Login error: $e');
+                  // Display error message to the user
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text('Login failed. Please try again.')),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -85,6 +135,8 @@ class LoginPage extends StatelessWidget {
                 style: TextStyle(fontSize: 18.0, color: Colors.white),
               ),
             ),
+
+            // sign up button ........
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
