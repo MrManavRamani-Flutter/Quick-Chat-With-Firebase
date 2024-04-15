@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Quick Chat',
-      // initialRoute: "welcome",
+      initialRoute: "welcome",
       routes: {
         "/": (context) => const HomeScreen(),
         "welcome": (context) => const SplashScreen(),

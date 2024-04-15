@@ -1,13 +1,81 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  void _signUp(BuildContext context) async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      String userId = userCredential.user!.uid;
+
+      // Get the current timestamp
+      Timestamp timestamp = Timestamp.now();
+
+      // Create a new document in the 'users' collection with the user ID as the document ID
+      await FirebaseFirestore.instance.collection('users').doc(userId).set({
+        'username': usernameController.text.trim(),
+        'email': emailController.text.trim(),
+        'createdAt': timestamp, // Store the creation timestamp
+        // You shouldn't store the password in plain text, it's just for demonstration
+        'password': passwordController.text.trim(),
+        // You can add more fields as needed
+      });
+
+      Navigator.of(context).pushNamed('login');
+    } catch (e) {
+      print('Signup error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Signup failed. Please try again.')),
+      );
+    }
+  }
+
+  // this code for authentication insert data to firebase database :
+
+  // void _signUp(BuildContext context) async {
+  //   try {
+  //     UserCredential userCredential =
+  //         await FirebaseAuth.instance.createUserWithEmailAndPassword(
+  //       email: emailController.text.trim(),
+  //       password: passwordController.text.trim(),
+  //     );
+  //
+  //     String userId = userCredential.user!.uid;
+  //
+  //     await FirebaseFirestore.instance.collection('users').doc(userId).set({
+  //       'username': usernameController.text.trim(),
+  //       'email': emailController.text.trim(),
+  //     });
+  //     Navigator.of(context).pushNamed('login');
+  //   } catch (e) {
+  //     print('Signup error: $e');
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Signup failed. Please try again.')),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.all(20.0),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -20,70 +88,82 @@ class SignUpScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Icon(Icons.person_add, size: 60.0, color: Colors.white),
+            const SizedBox(height: 20.0),
             const Text(
               'Sign Up',
-              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 32.0,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 45.0),
+            const SizedBox(height: 20.0),
             TextFormField(
+              controller: usernameController,
               decoration: InputDecoration(
                 hintText: 'Enter your name',
-                hintStyle: const TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white70),
+                prefixIcon: const Icon(Icons.person, color: Colors.white),
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.1),
                 border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(color: Colors.white),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(color: Colors.white),
                 ),
-                prefixIcon: const Icon(Icons.person, color: Colors.white),
               ),
               style: const TextStyle(color: Colors.white),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 10.0),
             TextFormField(
+              controller: emailController,
               decoration: InputDecoration(
                 hintText: 'Enter your email',
-                hintStyle: const TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white70),
+                prefixIcon: const Icon(Icons.email, color: Colors.white),
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.1),
                 border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(color: Colors.white),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(color: Colors.white),
                 ),
-                prefixIcon: const Icon(Icons.email, color: Colors.white),
               ),
               style: const TextStyle(color: Colors.white),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 10.0),
             TextFormField(
+              controller: passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 hintText: 'Enter your password',
-                hintStyle: const TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white70),
+                prefixIcon: const Icon(Icons.lock, color: Colors.white),
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.1),
                 border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(color: Colors.white),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(color: Colors.white),
                 ),
-                prefixIcon: const Icon(Icons.lock, color: Colors.white),
               ),
               style: const TextStyle(color: Colors.white),
             ),
-            const SizedBox(height: 24.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _signUp(context);
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -96,44 +176,14 @@ class SignUpScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18.0, color: Colors.white),
               ),
             ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
+            const SizedBox(height: 10.0),
+            TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, 'login');
+                Navigator.pushReplacementNamed(context, 'login');
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-              ),
               child: const Text(
-                'Login',
-                style: TextStyle(fontSize: 18.0, color: Colors.black),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            OutlinedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: Colors.white),
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.g_mobiledata_outlined,
-                      color: Colors.white, size: 34.0),
-                  SizedBox(width: 8.0),
-                  Text(
-                    'Sign up with Google',
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
-                  ),
-                ],
+                'Already have an account? Log in',
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ],

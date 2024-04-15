@@ -28,27 +28,37 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.blue,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.chat,
-              size: 100,
-              color: Colors.white,
-            ),
-            SizedBox(height: 24),
-            Text(
-              'Quick Chat',
-              style: TextStyle(
-                fontSize: 24,
+      body: Container(
+        padding: const EdgeInsets.all(20.0),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.black, Colors.lightBlueAccent],
+          ),
+        ),
+        child: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.chat,
+                size: 100,
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
               ),
-            ),
-          ],
+              SizedBox(height: 24),
+              Text(
+                'Quick Chat',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

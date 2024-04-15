@@ -33,7 +33,10 @@ class LoginPage extends StatelessWidget {
             TextFormField(
               decoration: InputDecoration(
                 hintText: 'Enter your email',
-                hintStyle: const TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white70),
+                prefixIcon: const Icon(Icons.email, color: Colors.white),
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.1),
                 border: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12.0),
@@ -42,7 +45,6 @@ class LoginPage extends StatelessWidget {
                   borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                prefixIcon: const Icon(Icons.email, color: Colors.white),
               ),
               style: const TextStyle(color: Colors.white),
             ),
@@ -52,6 +54,9 @@ class LoginPage extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: 'Enter your password',
                 hintStyle: const TextStyle(color: Colors.white),
+                prefixIcon: const Icon(Icons.lock, color: Colors.white),
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.1),
                 border: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12.0),
@@ -60,7 +65,6 @@ class LoginPage extends StatelessWidget {
                   borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                prefixIcon: const Icon(Icons.lock, color: Colors.white),
               ),
               style: const TextStyle(color: Colors.white),
             ),
@@ -84,7 +88,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, 'signup');
+                Navigator.pushReplacementNamed(context, 'signup');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
