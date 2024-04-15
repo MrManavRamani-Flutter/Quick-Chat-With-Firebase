@@ -24,7 +24,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       String userId = userCredential.user!.uid;
 
-      // Get the current timestamp
       Timestamp timestamp = Timestamp.now();
 
       // Create a new document in the 'users' collection with the user ID as the document ID
@@ -32,45 +31,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
         'username': usernameController.text.trim(),
         'email': emailController.text.trim(),
         'createdAt': timestamp,
-        // You shouldn't store the password in plain text, it's just for demonstration
         'password': passwordController.text.trim(),
         // You can add more fields as needed
       });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Signup Successfully....')),
       );
+      emailController.clear();
+      passwordController.clear();
+      usernameController.clear();
       Navigator.of(context).pushNamed('login');
     } catch (e) {
       print('Signup error: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Signup failed. Please try again.')),
       );
+      emailController.clear();
+      passwordController.clear();
+      usernameController.clear();
     }
   }
-
-  // this code for authentication insert data to firebase database :
-  // void _signUp(BuildContext context) async {
-  //   try {
-  //     UserCredential userCredential =
-  //         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-  //       email: emailController.text.trim(),
-  //       password: passwordController.text.trim(),
-  //     );
-  //
-  //     String userId = userCredential.user!.uid;
-  //
-  //     await FirebaseFirestore.instance.collection('users').doc(userId).set({
-  //       'username': usernameController.text.trim(),
-  //       'email': emailController.text.trim(),
-  //     });
-  //     Navigator.of(context).pushNamed('login');
-  //   } catch (e) {
-  //     print('Signup error: $e');
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(content: Text('Signup failed. Please try again.')),
-  //     );
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
