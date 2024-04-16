@@ -1,6 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:quick_chat/helpers/firebase_helper.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -13,44 +12,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  void _signUp(BuildContext context) async {
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-
-      String userId = userCredential.user!.uid;
-
-      Timestamp timestamp = Timestamp.now();
-
-      // Create a new document in the 'users' collection with the user ID as the document ID
-      await FirebaseFirestore.instance.collection('users').doc(userId).set({
-        'username': usernameController.text.trim(),
-        'email': emailController.text.trim(),
-        'createdAt': timestamp,
-        'password': passwordController.text.trim(),
-        // You can add more fields as needed
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Signup Successfully....')),
-      );
-      emailController.clear();
-      passwordController.clear();
-      usernameController.clear();
-      Navigator.of(context).pushNamed('login');
-    } catch (e) {
-      print('Signup error: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Signup failed. Please try again.')),
-      );
-      emailController.clear();
-      passwordController.clear();
-      usernameController.clear();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,9 +102,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
               style: const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 20.0),
+            // Sign Up button ................
             ElevatedButton(
-              onPressed: () {
-                _signUp(context);
+              onPressed: () async {
+                String username = usernameController.text.trim();
+                String email = emailController.text.trim();
+                String password = passwordController.text.trim();
+
+                try {
+                  await FirebaseHelper.signUpUser(username, email, password);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Signup successful')),
+                  );
+                  emailController.clear();
+                  passwordController.clear();
+                  usernameController.clear();
+                  Navigator.pushReplacementNamed(context, 'login');
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text('Signup failed. Please try again.')),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,

@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:quick_chat/helpers/firebase_helper.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -80,46 +80,23 @@ class _LoginPageState extends State<LoginPage> {
               style: const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 24.0),
-            // login button ........
+            // login button ...................
             ElevatedButton(
               onPressed: () async {
-                try {
-                  // Retrieve user input
-                  String email = emailController.text.trim();
-                  String password = passwordController.text.trim();
+                String email = emailController.text.trim();
+                String password = passwordController.text.trim();
+                bool loggedIn = await FirebaseHelper.loginUser(email, password);
 
-                  // Query Firestore for a user with the provided email and password
-                  QuerySnapshot<Map<String, dynamic>> snapshot =
-                      await FirebaseFirestore.instance
-                          .collection('users')
-                          .where('email', isEqualTo: email)
-                          .where('password', isEqualTo: password)
-                          .get();
-
-                  // Check if there's a matching user
-                  if (snapshot.docs.isNotEmpty) {
-                    // Navigate to home screen or any other screen after successful login
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('login successfully....')),
-                    );
-                    emailController.clear();
-                    passwordController.clear();
-                    Navigator.pushReplacementNamed(context, '/');
-                  } else {
-                    // If no matching user is found, display an error message
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Invalid email or password!!!!')),
-                    );
-                    emailController.clear();
-                    passwordController.clear();
-                  }
-                } catch (e) {
-                  print('Login error: $e');
-                  // Display error message to the user
+                if (loggedIn) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text('Login failed. Please try again.')),
+                    const SnackBar(content: Text('Login successful')),
+                  );
+                  emailController.clear();
+                  passwordController.clear();
+                  Navigator.pushReplacementNamed(context, '/');
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Invalid email or password')),
                   );
                 }
               },
@@ -135,7 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(fontSize: 18.0, color: Colors.white),
               ),
             ),
-
             // sign up button ........
             const SizedBox(height: 16.0),
             ElevatedButton(
