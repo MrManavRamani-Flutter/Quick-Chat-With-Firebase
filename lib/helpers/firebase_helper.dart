@@ -62,6 +62,23 @@ class FirebaseHelper {
     }
   }
 
+  static Future<String?> getCurrentUserId() async {
+    try {
+      // Get the current user from FirebaseAuth
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        // Return the user's ID if it exists
+        return user.uid;
+      } else {
+        // Return null if no user is logged in
+        return null;
+      }
+    } catch (e) {
+      print('Error getting current user ID: $e');
+      return null;
+    }
+  }
+
   static Future<void> _saveUserDataToSharedPreferences(String email) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('email', email);

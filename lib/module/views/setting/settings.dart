@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quick_chat/helpers/firebase_helper.dart';
-import 'package:quick_chat/module/views/profile/profile.dart';
+import 'package:quick_chat/module/views/profile/profile_screen.dart';
 import 'package:quick_chat/module/views/setting/setting_list/setting_item.dart';
 import 'package:quick_chat/module/views/themes/app_theme.dart';
 
@@ -29,13 +29,17 @@ class SettingsScreen extends StatelessWidget {
             SettingsListTile(
               icon: Icons.person,
               title: 'Profile',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProfileScreen(),
-                  ),
-                );
+              onTap: () async {
+                // Fetch user ID here
+                String? userId = await FirebaseHelper.getCurrentUserId();
+                if (userId != null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileScreen(userId: userId),
+                    ),
+                  );
+                }
               },
             ),
             SettingsListTile(
