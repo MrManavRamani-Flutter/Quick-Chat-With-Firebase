@@ -80,7 +80,6 @@ class _LoginPageState extends State<LoginPage> {
               style: const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 24.0),
-            // login button ...................
             ElevatedButton(
               onPressed: () async {
                 String email = emailController.text.trim();
@@ -112,7 +111,6 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(fontSize: 18.0, color: Colors.white),
               ),
             ),
-            // sign up button ........
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {

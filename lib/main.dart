@@ -2,10 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:quick_chat/firebase_options.dart';
 import 'package:quick_chat/module/views/chat/chat_screen.dart';
+import 'package:quick_chat/module/views/chat/favorites_chat.dart';
 import 'package:quick_chat/module/views/login_screen/login_screen.dart';
 import 'package:quick_chat/module/views/login_screen/signup_screen.dart';
-import 'package:quick_chat/module/views/profile/user_profile/user_profile.dart';
+import 'package:quick_chat/module/views/profile/profile.dart';
 import 'package:quick_chat/module/views/screens/home_screen.dart';
+import 'package:quick_chat/module/views/setting/settings.dart';
 import 'package:quick_chat/module/views/welcome/splash_screen.dart';
 
 void main() async {
@@ -30,8 +32,10 @@ class MyApp extends StatelessWidget {
         "welcome": (context) => const SplashScreen(),
         "login": (context) => const LoginPage(),
         "signup": (context) => const SignUpScreen(),
-        "chat_screen": (context) => const ChatScreen(),
-        "user_profile": (context) => const ProfileScreen(),
+        '/settings': (context) => const SettingsScreen(),
+        '/favorites': (context) => const FavoritesScreen(),
+        '/chat': (context) => const ChatScreen(),
+        '/profile': (context) => const ProfileScreen(),
       },
     );
   }

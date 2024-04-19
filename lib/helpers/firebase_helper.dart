@@ -1,9 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseHelper {
   static Future<bool> loginUser(String email, String password) async {
     try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      await _saveUserDataToSharedPreferences(email);
+
       QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
           .instance
           .collection('users')
@@ -15,6 +24,16 @@ class FirebaseHelper {
     } catch (e) {
       print('Login error: $e');
       return false;
+    }
+  }
+
+  static Future<void> logout(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      await _clearUserDataFromSharedPreferences();
+      Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
+    } catch (e) {
+      print('Error logging out: $e');
     }
   }
 
@@ -39,7 +58,19 @@ class FirebaseHelper {
       });
     } catch (e) {
       print('Signup error: $e');
-      rethrow; // Re-throwing the exception to handle it in the UI
+      rethrow;
     }
+  }
+
+  static Future<void> _saveUserDataToSharedPreferences(String email) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('email', email);
+    await prefs.setBool('isLoggedIn', true);
+  }
+
+  static Future<void> _clearUserDataFromSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('email');
+    await prefs.setBool('isLoggedIn', false);
   }
 }

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
+class FavoritesScreen extends StatelessWidget {
+  const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat'),
+        title: const Text('Favorites'),
       ),
       body: Container(
         child: const Center(
-          child: Text("Chat Page"),
+          child: Text("Favorites Page"),
         ),
       ),
     );
