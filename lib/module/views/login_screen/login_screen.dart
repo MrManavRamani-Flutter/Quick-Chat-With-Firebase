@@ -87,16 +87,24 @@ class _LoginPageState extends State<LoginPage> {
                 bool loggedIn = await FirebaseHelper.loginUser(email, password);
 
                 if (loggedIn) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Login successful')),
-                  );
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Login successful')),
+                    );
+                  }
+
                   emailController.clear();
                   passwordController.clear();
-                  Navigator.pushReplacementNamed(context, '/');
+                  if (context.mounted) {
+                    Navigator.pushReplacementNamed(context, '/');
+                  }
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Invalid email or password')),
-                  );
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Invalid email or password')),
+                    );
+                  }
                 }
               },
               style: ElevatedButton.styleFrom(

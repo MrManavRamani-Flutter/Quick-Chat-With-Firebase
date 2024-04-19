@@ -111,18 +111,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 try {
                   await FirebaseHelper.signUpUser(username, email, password);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Signup successful')),
-                  );
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Signup successful')),
+                    );
+                  }
                   emailController.clear();
                   passwordController.clear();
                   usernameController.clear();
-                  Navigator.pushReplacementNamed(context, 'login');
+                  if (context.mounted) {
+                    Navigator.pushReplacementNamed(context, 'login');
+                  }
                 } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text('Signup failed. Please try again.')),
-                  );
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Signup failed. Please try again.')),
+                    );
+                  }
                 }
               },
               style: ElevatedButton.styleFrom(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quick_chat/module/views/screens/list_user_ui/list_user.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final String currentUserEmail;
+  const HomeScreen({super.key, required this.currentUserEmail});
 
   @override
   Widget build(BuildContext context) {
@@ -9,9 +11,9 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Quick Chat'),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Text("Home Screen"),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: UserDataListWidget(currentUserEmail: currentUserEmail),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0, // Index of the current tab

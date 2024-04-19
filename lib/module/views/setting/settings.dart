@@ -33,12 +33,14 @@ class SettingsScreen extends StatelessWidget {
                 // Fetch user ID here
                 String? userId = await FirebaseHelper.getCurrentUserId();
                 if (userId != null) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProfileScreen(userId: userId),
-                    ),
-                  );
+                  if (context.mounted) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfileScreen(userId: userId),
+                      ),
+                    );
+                  }
                 }
               },
             ),

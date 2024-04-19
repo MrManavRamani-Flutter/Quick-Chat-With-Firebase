@@ -5,7 +5,6 @@ import 'package:quick_chat/module/views/chat/chat_screen.dart';
 import 'package:quick_chat/module/views/chat/favorites_chat.dart';
 import 'package:quick_chat/module/views/login_screen/login_screen.dart';
 import 'package:quick_chat/module/views/login_screen/signup_screen.dart';
-import 'package:quick_chat/module/views/screens/home_screen.dart';
 import 'package:quick_chat/module/views/setting/settings.dart';
 import 'package:quick_chat/module/views/welcome/splash_screen.dart';
 
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Quick Chat',
       initialRoute: "welcome",
       routes: {
-        "/": (context) => const HomeScreen(),
+        // "/": (context) => const HomeScreen(),
         "welcome": (context) => const SplashScreen(),
         "login": (context) => const LoginPage(),
         "signup": (context) => const SignUpScreen(),

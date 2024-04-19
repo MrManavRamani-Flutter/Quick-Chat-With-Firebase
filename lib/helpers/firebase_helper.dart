@@ -1,16 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseHelper {
+  static final Logger _logger = Logger();
   static Future<bool> loginUser(String email, String password) async {
     try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      // UserCredential userCredential =
+      //     await FirebaseAuth.instance.signInWithEmailAndPassword(
+      //   email: email,
+      //   password: password,
+      // );
       await _saveUserDataToSharedPreferences(email);
 
       QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
@@ -22,7 +24,7 @@ class FirebaseHelper {
 
       return snapshot.docs.isNotEmpty;
     } catch (e) {
-      print('Login error: $e');
+      _logger.e('Login error: $e');
       return false;
     }
   }
@@ -31,9 +33,12 @@ class FirebaseHelper {
     try {
       await FirebaseAuth.instance.signOut();
       await _clearUserDataFromSharedPreferences();
-      Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
+      if (context.mounted) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('login', (route) => false);
+      }
     } catch (e) {
-      print('Error logging out: $e');
+      _logger.e('Error logging out: $e');
     }
   }
 
@@ -57,7 +62,7 @@ class FirebaseHelper {
         'password': password,
       });
     } catch (e) {
-      print('Signup error: $e');
+      _logger.e('Signup error: $e');
       rethrow;
     }
   }
@@ -74,7 +79,7 @@ class FirebaseHelper {
         return null;
       }
     } catch (e) {
-      print('Error getting current user ID: $e');
+      _logger.e('Error getting current user ID: $e');
       return null;
     }
   }
@@ -89,5 +94,19 @@ class FirebaseHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('email');
     await prefs.setBool('isLoggedIn', false);
+  }
+
+  static Future<List<DocumentSnapshot>> fetchAllUserData(
+      String currentUserEmail) async {
+    try {
+      final usersSnapshot =
+          await FirebaseFirestore.instance.collection('users').get();
+      return usersSnapshot.docs
+          .where((doc) => doc['email'] != currentUserEmail)
+          .toList();
+    } catch (e) {
+      _logger.e('Error fetching user data: $e');
+      rethrow;
+    }
   }
 }
