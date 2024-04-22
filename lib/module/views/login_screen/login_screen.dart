@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quick_chat/helpers/firebase_helper.dart';
+import 'package:quick_chat/module/views/screens/home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -85,18 +86,22 @@ class _LoginPageState extends State<LoginPage> {
                 String email = emailController.text.trim();
                 String password = passwordController.text.trim();
                 bool loggedIn = await FirebaseHelper.loginUser(email, password);
-
                 if (loggedIn) {
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Login successful')),
                     );
                   }
-
                   emailController.clear();
                   passwordController.clear();
                   if (context.mounted) {
-                    Navigator.pushReplacementNamed(context, '/');
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            HomeScreen(currentUserEmail: email),
+                      ),
+                    );
                   }
                 } else {
                   if (context.mounted) {

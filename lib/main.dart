@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:quick_chat/firebase_options.dart';
-import 'package:quick_chat/module/views/chat/chat_screen.dart';
 import 'package:quick_chat/module/views/chat/favorites_chat.dart';
 import 'package:quick_chat/module/views/login_screen/login_screen.dart';
 import 'package:quick_chat/module/views/login_screen/signup_screen.dart';
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
         "signup": (context) => const SignUpScreen(),
         '/settings': (context) => const SettingsScreen(),
         '/favorites': (context) => const FavoritesScreen(),
-        '/chat': (context) => const ChatScreen(),
+        // '/chat': (context) => const ChatScreen(),
       },
     );
   }

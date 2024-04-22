@@ -67,23 +67,6 @@ class FirebaseHelper {
     }
   }
 
-  static Future<String?> getCurrentUserId() async {
-    try {
-      // Get the current user from FirebaseAuth
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        // Return the user's ID if it exists
-        return user.uid;
-      } else {
-        // Return null if no user is logged in
-        return null;
-      }
-    } catch (e) {
-      _logger.e('Error getting current user ID: $e');
-      return null;
-    }
-  }
-
   static Future<void> _saveUserDataToSharedPreferences(String email) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('email', email);
@@ -104,6 +87,17 @@ class FirebaseHelper {
       return usersSnapshot.docs
           .where((doc) => doc['email'] != currentUserEmail)
           .toList();
+    } catch (e) {
+      _logger.e('Error fetching user data: $e');
+      rethrow;
+    }
+  }
+
+  static Future<List<DocumentSnapshot>> fetchUserData(String email) async {
+    try {
+      final userData =
+          await FirebaseFirestore.instance.collection('users').get();
+      return userData.docs.where((doc) => doc['email'] == email).toList();
     } catch (e) {
       _logger.e('Error fetching user data: $e');
       rethrow;

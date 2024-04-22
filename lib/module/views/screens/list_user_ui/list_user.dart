@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:quick_chat/helpers/firebase_helper.dart';
+import 'package:quick_chat/module/views/chat/chat_screen.dart';
 
 class UserDataListWidget extends StatelessWidget {
   final String currentUserEmail;
@@ -27,6 +28,16 @@ class UserDataListWidget extends StatelessWidget {
               return ListTile(
                 title: Text(username),
                 subtitle: Text(email),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatScreen(
+                        username: username,
+                      ),
+                    ),
+                  );
+                },
               );
             },
           );
