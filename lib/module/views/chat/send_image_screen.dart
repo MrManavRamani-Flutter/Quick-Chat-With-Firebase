@@ -16,10 +16,10 @@ class SendImageScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SendImageScreenState createState() => _SendImageScreenState();
+  SendImageScreenState createState() => SendImageScreenState();
 }
 
-class _SendImageScreenState extends State<SendImageScreen> {
+class SendImageScreenState extends State<SendImageScreen> {
   final ImagePicker _picker = ImagePicker();
   String? _imageUrl;
   bool _isImageSelected = false;
@@ -42,7 +42,7 @@ class _SendImageScreenState extends State<SendImageScreen> {
                   fit: BoxFit.cover,
                 )
               : const SizedBox.shrink(),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -51,9 +51,9 @@ class _SendImageScreenState extends State<SendImageScreen> {
                 label: const Text('Select Image'),
                 onPressed: _pickImage,
               ),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               _isSendingImage
-                  ? CircularProgressIndicator()
+                  ? const CircularProgressIndicator()
                   : ElevatedButton.icon(
                       icon: const Icon(Icons.send),
                       label: const Text('Send'),
@@ -114,96 +114,3 @@ class _SendImageScreenState extends State<SendImageScreen> {
     return await ref.getDownloadURL();
   }
 }
-
-// import 'dart:io';
-//
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
-// import 'package:flutter/material.dart';
-//
-// class SendImageScreen extends StatefulWidget {
-//   final String imageFile;
-//   final String chatRoomId;
-//   final String currentUserEmail;
-//
-//   const SendImageScreen({
-//     Key? key,
-//     required this.imageFile,
-//     required this.chatRoomId,
-//     required this.currentUserEmail,
-//   }) : super(key: key);
-//
-//   @override
-//   _SendImageScreenState createState() => _SendImageScreenState();
-// }
-//
-// class _SendImageScreenState extends State<SendImageScreen> {
-//   late String _uploadedImageUrl;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _uploadImage();
-//   }
-//
-//   Future<void> _uploadImage() async {
-//     try {
-//       final imageFile = File(widget.imageFile);
-//       final ref = FirebaseStorage.instance
-//           .ref()
-//           .child('chat_images')
-//           .child('${DateTime.now().millisecondsSinceEpoch}.jpg');
-//       final uploadTask = ref.putFile(imageFile);
-//       await uploadTask.whenComplete(() {});
-//       final imageUrl = await ref.getDownloadURL();
-//       setState(() {
-//         _uploadedImageUrl = imageUrl;
-//       });
-//     } catch (e) {
-//       print('Error uploading image: $e');
-//     }
-//   }
-//
-//   Future<void> _sendMessage() async {
-//     try {
-//       await FirebaseFirestore.instance
-//           .collection('chats')
-//           .doc(widget.chatRoomId)
-//           .collection('messages')
-//           .add({
-//         'sender': widget.currentUserEmail,
-//         'imageUrl': _uploadedImageUrl,
-//         'time': Timestamp.now(),
-//       });
-//       Navigator.pop(context);
-//     } catch (e) {
-//       print('Error sending message: $e');
-//     }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Image.file(
-//               File(widget.imageFile),
-//               width: 150,
-//               height: 150,
-//               fit: BoxFit.cover,
-//             ),
-//             InkWell(
-//               onTap: _sendMessage,
-//               child: Container(
-//                   padding: const EdgeInsets.all(10),
-//                   child: const Text('Send Image')),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

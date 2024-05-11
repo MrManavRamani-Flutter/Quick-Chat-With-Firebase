@@ -39,6 +39,7 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   shared_preferences:
+  path_provider:
   logger:
   intl:
   image_picker:
