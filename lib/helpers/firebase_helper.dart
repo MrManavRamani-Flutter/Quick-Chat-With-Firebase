@@ -6,6 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseHelper {
   static final Logger _logger = Logger();
+
+  static String getChatRoomId(String user1Email, String user2Email) {
+    List<String> users = [user1Email, user2Email];
+    users.sort();
+    return '${users[0]}_${users[1]}';
+  }
+
   static Future<bool> loginUser(String email, String password) async {
     try {
       // UserCredential userCredential =

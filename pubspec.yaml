@@ -40,6 +40,9 @@ dependencies:
   cloud_firestore:
   shared_preferences:
   logger:
+  intl:
+  image_picker:
+  firebase_storage:
 
 dev_dependencies:
   flutter_test:

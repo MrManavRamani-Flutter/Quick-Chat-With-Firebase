@@ -13,7 +13,7 @@ class ProfileDetail extends StatefulWidget {
     required this.username,
     required this.imageUrl,
     this.bio = 'This is my bio',
-    this.followers = 1000,
+    this.followers = 1000000,
     this.following = 100,
     this.posts = 365,
   });
