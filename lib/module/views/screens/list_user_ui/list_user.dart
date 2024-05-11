@@ -36,6 +36,7 @@ class UserDataListWidget extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ChatScreen(
+                        receiverUsername: username,
                         currentUserEmail: currentUserEmail,
                         chatRoomId: chatRoomId,
                       ),
