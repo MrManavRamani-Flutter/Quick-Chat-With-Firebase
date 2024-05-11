@@ -98,8 +98,6 @@ class MessageBubble extends StatelessWidget {
 // import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
 //
-// import 'image_preview_screen.dart';
-//
 // class MessageBubble extends StatelessWidget {
 //   final String? message;
 //   final String? imageUrl;
@@ -139,68 +137,24 @@ class MessageBubble extends StatelessWidget {
 //           crossAxisAlignment: CrossAxisAlignment.start,
 //           children: [
 //             if (imageUrl != null)
-//               GestureDetector(
-//                 onTap: () {
-//                   Navigator.push(
-//                     context,
-//                     MaterialPageRoute(
-//                       builder: (context) => ImagePreviewScreen(
-//                         imageUrl: imageUrl!,
-//                       ),
-//                     ),
-//                   );
+//               Image.network(
+//                 imageUrl!,
+//                 loadingBuilder: (BuildContext context, Widget child,
+//                     ImageChunkEvent? loadingProgress) {
+//                   if (loadingProgress == null) {
+//                     return child;
+//                   } else {
+//                     return const CircularProgressIndicator();
+//                   }
 //                 },
-//                 child: Image.network(
-//                   imageUrl!,
-//                   loadingBuilder: (BuildContext context, Widget child,
-//                       ImageChunkEvent? loadingProgress) {
-//                     if (loadingProgress == null) {
-//                       return child;
-//                     } else {
-//                       return const CircularProgressIndicator();
-//                     }
-//                   },
-//                   errorBuilder: (BuildContext context, Object exception,
-//                       StackTrace? stackTrace) {
-//                     return const Text('Failed to load image');
-//                   },
-//                   width: 150,
-//                   height: 150,
-//                   fit: BoxFit.cover,
-//                 ),
+//                 errorBuilder: (BuildContext context, Object exception,
+//                     StackTrace? stackTrace) {
+//                   return const Text('Failed to load image');
+//                 },
+//                 width: 150,
+//                 height: 150,
+//                 fit: BoxFit.cover,
 //               ),
-//
-//             // GestureDetector(
-//             //   onTap: () {
-//             //     Navigator.push(
-//             //       context,
-//             //       MaterialPageRoute(
-//             //         builder: (context) => ImagePreviewScreen(
-//             //           imageUrl: imageUrl!,
-//             //           sendMessage: () {}, // Placeholder for send function
-//             //         ),
-//             //       ),
-//             //     );
-//             //   },
-//             //   child: Image.network(
-//             //     imageUrl!,
-//             //     loadingBuilder: (BuildContext context, Widget child,
-//             //         ImageChunkEvent? loadingProgress) {
-//             //       if (loadingProgress == null) {
-//             //         return child;
-//             //       } else {
-//             //         return const CircularProgressIndicator();
-//             //       }
-//             //     },
-//             //     errorBuilder: (BuildContext context, Object exception,
-//             //         StackTrace? stackTrace) {
-//             //       return const Text('Failed to load image');
-//             //     },
-//             //     width: 150,
-//             //     height: 150,
-//             //     fit: BoxFit.cover,
-//             //   ),
-//             // ),
 //             if (message != null) ...[
 //               Text(
 //                 message!,
@@ -223,3 +177,4 @@ class MessageBubble extends StatelessWidget {
 //     );
 //   }
 // }
+//
