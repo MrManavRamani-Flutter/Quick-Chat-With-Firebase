@@ -43,6 +43,9 @@ dependencies:
   intl:
   image_picker:
   firebase_storage:
+  photo_view:
+  permission_handler:
+  image_gallery_saver:
 
 dev_dependencies:
   flutter_test:
