@@ -24,7 +24,6 @@ class UserDataListWidget extends StatelessWidget {
               final userData = userList[index].data() as Map<String, dynamic>;
               final username = userData['username'] ?? 'Unknown';
               final email = userData['email'] ?? 'Unknown';
-              // Customize the user widget as needed
               return ListTile(
                 title: Text(username),
                 subtitle: Text(email),
