@@ -25,8 +25,11 @@ class ProfileScreenState extends State<ProfileScreen> {
           } else {
             final userList = snapshot.data!;
             return ProfileDetail(
+              email: widget.currentUserEmail,
               username: userList[0]['username'],
-              imageUrl: 'https://avatars.githubusercontent.com/u/104958217?v=4',
+              imageUrl: userList[0]['imageUrl'],
+              bio: userList[0]['bio'],
+              // imageUrl: 'https://avatars.githubusercontent.com/u/104958217?v=4',
             );
           }
         },

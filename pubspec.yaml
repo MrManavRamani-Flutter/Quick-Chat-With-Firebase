@@ -40,6 +40,7 @@ dependencies:
   cloud_firestore:
   shared_preferences:
   path_provider:
+  path:
   logger:
   intl:
   image_picker:

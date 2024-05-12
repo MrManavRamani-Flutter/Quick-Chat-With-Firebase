@@ -1,10 +1,89 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:quick_chat/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseHelper {
+  static Future<UserData> getUserData(String email) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> userDataSnapshot =
+          await FirebaseFirestore.instance.collection('users').doc(email).get();
+
+      if (userDataSnapshot.exists) {
+        Map<String, dynamic> userDataMap = userDataSnapshot.data()!;
+        return UserData(
+          username: userDataMap['username'] ?? '',
+          bio: userDataMap['bio'] ?? '',
+          imageUrl: userDataMap['imageUrl'] ?? '',
+        );
+      } else {
+        // User data not found, return default values
+        return UserData(
+          username: '',
+          bio: '',
+          imageUrl: '',
+        );
+      }
+    } catch (e) {
+      print('Error fetching user data: $e');
+      // Return default values if an error occurs
+      return UserData(
+        username: '',
+        bio: '',
+        imageUrl: '',
+      );
+    }
+  }
+
+  static Future<String?> uploadProfileImage(File imageFile) async {
+    try {
+      Reference ref = FirebaseStorage.instance
+          .ref()
+          .child('profile_images')
+          .child(DateTime.now().millisecondsSinceEpoch.toString());
+
+      UploadTask uploadTask = ref.putFile(imageFile);
+      TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+      String imageUrl = await taskSnapshot.ref.getDownloadURL();
+
+      return imageUrl;
+    } catch (e) {
+      print('Error uploading image: $e');
+      return null;
+    }
+  }
+
+  static Future<void> setProfile(
+      String username, String email, String bio, String imageUrl) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+          .instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        String userId = snapshot.docs[0].id;
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .update({
+          'username': username,
+          'bio': bio,
+          'imageUrl': imageUrl,
+        });
+      }
+    } catch (e) {
+      print('Error setting profile: $e');
+      rethrow;
+    }
+  }
+
   static final Logger _logger = Logger();
 
   static String getChatRoomId(String user1Email, String user2Email) {
@@ -16,7 +95,7 @@ class FirebaseHelper {
   static Future<bool> loginUser(String email, String password) async {
     try {
       // UserCredential userCredential =
-      //     await FirebaseAuth.instance.signInWithEmailAndPassword(
+      //     await FirebaseAuth.insta nce.signInWithEmailAndPassword(
       //   email: email,
       //   password: password,
       // );
@@ -109,5 +188,10 @@ class FirebaseHelper {
       _logger.e('Error fetching user data: $e');
       rethrow;
     }
+  }
+
+  static Future<bool> isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isLoggedIn') ?? false;
   }
 }
