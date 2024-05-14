@@ -38,16 +38,16 @@ dependencies:
   firebase_core:
   firebase_auth:
   cloud_firestore:
-  shared_preferences:
-  path_provider:
-  path:
-  logger:
-  intl:
-  image_picker:
   firebase_storage:
-  photo_view:
+  shared_preferences:
   permission_handler:
   image_gallery_saver:
+  path_provider:
+  image_picker:
+  photo_view:
+  logger:
+  path:
+  intl:
 
 dev_dependencies:
   flutter_test:
@@ -58,7 +58,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
