@@ -42,7 +42,9 @@ class HomeScreen extends StatelessWidget {
             ),
             IconButton(
               icon: const Icon(Icons.search, color: AppTheme.textColor),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, 'search');
+              },
             ),
             IconButton(
               icon: const Icon(Icons.add_circle_outline,

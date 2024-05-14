@@ -10,10 +10,10 @@ class SendImageScreen extends StatefulWidget {
   final String chatRoomId;
 
   const SendImageScreen({
-    Key? key,
+    super.key,
     required this.currentUserEmail,
     required this.chatRoomId,
-  }) : super(key: key);
+  });
 
   @override
   SendImageScreenState createState() => SendImageScreenState();

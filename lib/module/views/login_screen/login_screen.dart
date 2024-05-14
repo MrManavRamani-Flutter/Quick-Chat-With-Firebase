@@ -3,7 +3,8 @@ import 'package:quick_chat/helpers/firebase_helper.dart';
 import 'package:quick_chat/module/views/screens/home_screen.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
+
 
   @override
   State<LoginPage> createState() => _LoginPageState();
