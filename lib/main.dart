@@ -4,7 +4,6 @@ import 'package:quick_chat/firebase_options.dart';
 import 'package:quick_chat/module/views/chat/favorites_chat.dart';
 import 'package:quick_chat/module/views/login_screen/login_screen.dart';
 import 'package:quick_chat/module/views/login_screen/signup_screen.dart';
-import 'package:quick_chat/module/views/search_user/search_users.dart';
 import 'package:quick_chat/module/views/setting/settings.dart';
 import 'package:quick_chat/module/views/themes/app_theme.dart';
 import 'package:quick_chat/module/views/welcome/splash_screen.dart';
@@ -33,7 +32,6 @@ class MyApp extends StatelessWidget {
         'signup': (context) => const SignUpScreen(),
         '/settings': (context) => const SettingsScreen(),
         '/favorites': (context) => const FavoritesScreen(),
-        'search': (context) => const SearchUsers(),
       },
     );
   }

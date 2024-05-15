@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quick_chat/module/views/screens/list_user_ui/list_user.dart';
+import 'package:quick_chat/module/views/search_user/search_users.dart';
 import 'package:quick_chat/module/views/themes/app_theme.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -43,13 +44,27 @@ class HomeScreen extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.search, color: AppTheme.textColor),
               onPressed: () {
-                Navigator.pushNamed(context, 'search');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SearchScreen(currentUserEmail: currentUserEmail),
+                  ),
+                );
               },
             ),
             IconButton(
-              icon: const Icon(Icons.add_circle_outline,
+              icon: const Icon(Icons.add_reaction_outlined,
                   color: AppTheme.textColor),
-              onPressed: () {},
+              onPressed: () {
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) =>
+                //         AddFriend(currentUserEmail: currentUserEmail),
+                //   ),
+                // );
+              },
             ),
             IconButton(
               icon:

@@ -1,16 +1,19 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:quick_chat/helpers/firebase_helper.dart';
 import 'package:quick_chat/model/user_model.dart';
+import 'package:quick_chat/module/views/profile/user_profile_screen.dart';
 
-class SearchUsers extends StatefulWidget {
-  const SearchUsers({super.key});
+class SearchScreen extends StatefulWidget {
+  final String currentUserEmail;
+
+  const SearchScreen({Key? key, required this.currentUserEmail})
+      : super(key: key);
 
   @override
-  SearchUsersState createState() => SearchUsersState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class SearchUsersState extends State<SearchUsers> {
+class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<UserData> _searchResults = [];
   bool _isLoading = false;
@@ -21,18 +24,12 @@ class SearchUsersState extends State<SearchUsers> {
     });
 
     try {
-      List<DocumentSnapshot> userDocs =
-          await FirebaseHelper.fetchAllUserData(query);
+      List<UserData> users = await FirebaseHelper.searchUsers(query);
 
       setState(() {
-        _searchResults = userDocs.map((doc) {
-          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-          return UserData(
-            username: data['username'] ?? '',
-            bio: data['bio'] ?? '',
-            imageUrl: data['imageUrl'] ?? '',
-          );
-        }).toList();
+        _searchResults = users
+            .where((user) => user.username != widget.currentUserEmail)
+            .toList();
       });
     } catch (e) {
       print('Error searching users: $e');
@@ -47,20 +44,35 @@ class SearchUsersState extends State<SearchUsers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextField(
-          controller: _searchController,
-          onChanged: _searchUsers,
-          decoration: InputDecoration(
-            hintText: 'Search users',
-            border: InputBorder.none,
-            suffixIcon: IconButton(
-              icon: const Icon(Icons.clear),
-              onPressed: () {
-                _searchController.clear();
-                setState(() {
-                  _searchResults.clear();
-                });
-              },
+        title: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          decoration: BoxDecoration(
+            color: Colors.lightBlueAccent.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: TextField(
+            controller: _searchController,
+            onChanged: _searchUsers,
+            decoration: InputDecoration(
+              hintText: 'Search users',
+              border: InputBorder.none,
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.transparent),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.transparent),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.clear),
+                onPressed: () {
+                  _searchController.clear();
+                  setState(() {
+                    _searchResults.clear();
+                  });
+                },
+              ),
             ),
           ),
         ),
@@ -71,28 +83,23 @@ class SearchUsersState extends State<SearchUsers> {
               ? ListView.builder(
                   itemCount: _searchResults.length,
                   itemBuilder: (context, index) {
+                    final user = _searchResults[index];
                     return ListTile(
                       leading: CircleAvatar(
-                        backgroundImage:
-                            _searchResults[index].imageUrl.isNotEmpty
-                                ? NetworkImage(_searchResults[index].imageUrl)
-                                : const AssetImage(
-                                        'assets/default_profile_image.jpg')
-                                    as ImageProvider,
+                        backgroundImage: user.imageUrl.isNotEmpty
+                            ? NetworkImage(user.imageUrl)
+                            : const AssetImage('assets/img/users/unu.png')
+                                as ImageProvider,
                       ),
-                      title: Text(_searchResults[index].username),
-                      subtitle: Text(_searchResults[index].bio),
+                      title: Text(user.username),
+                      subtitle: Text(user.bio),
                       onTap: () {
-                        // Add functionality to navigate to user's profile
-                        // For example:
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => UserProfileScreen(
-                        //       user: _searchResults[index],
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserProfileScreen(user: user),
+                          ),
+                        );
                       },
                     );
                   },

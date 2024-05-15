@@ -9,6 +9,32 @@ import 'package:quick_chat/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseHelper {
+  // User Search -------------------------------------
+  static Future<List<UserData>> searchUsers(String query) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> usersSnapshot =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .where('username', isGreaterThanOrEqualTo: query)
+              .where('username', isLessThan: '${query}z')
+              .get();
+
+      List<UserData> users = usersSnapshot.docs.map((doc) {
+        Map<String, dynamic> userData = doc.data();
+        return UserData(
+          username: userData['username'] ?? '',
+          bio: userData['bio'] ?? '',
+          imageUrl: userData['imageUrl'] ?? '',
+        );
+      }).toList();
+
+      return users;
+    } catch (e) {
+      print('Error searching users: $e');
+      return [];
+    }
+  }
+
   static Future<UserData> getUserData(String email) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> userDataSnapshot =
