@@ -10,7 +10,7 @@ A new Flutter project.
 
 | Send Pic Preview | User Profile | User Posts View | Search Screen |
 | --- | --- | --- | --- |
-| <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/assets/148671843/eddeed87-2881-4faa-85fb-6bd1dd36c08f" alt="Send Pic Preview" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/assets/148671843/97d79b22-ca46-402c-ad9c-1d49f3c9e85" alt="User Profile" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/assets/148671843/50d94743-02bd-4001-8684-c6eec0f94ec8" alt="User Posts View" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/assets/148671843/6bd4ec2b-e2f8-472c-8a3f-56f156d17f84" alt="Search Screen" width="200" height="400"> |
+| <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/assets/148671843/eddeed87-2881-4faa-85fb-6bd1dd36c08f" alt="Send Pic Preview" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/assets/148671843/97d79b22-ca46-402c-ad9c-1d49f3c9e85f" alt="User Profile" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/assets/148671843/50d94743-02bd-4001-8684-c6eec0f94ec8" alt="User Posts View" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/assets/148671843/6bd4ec2b-e2f8-472c-8a3f-56f156d17f84" alt="Search Screen" width="200" height="400"> |
 
 | Search M Screen | Setting Screen | Current User Profile | Current User Post View |
 | --- | --- | --- | --- |
