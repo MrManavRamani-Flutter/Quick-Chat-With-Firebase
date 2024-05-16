@@ -54,8 +54,10 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.add_reaction_outlined,
-                  color: AppTheme.textColor),
+              icon: const Icon(
+                Icons.add_reaction_outlined,
+                color: Colors.grey,
+              ),
               onPressed: () {
                 // Navigator.push(
                 //   context,
@@ -67,8 +69,10 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             IconButton(
-              icon:
-                  const Icon(Icons.favorite_border, color: AppTheme.textColor),
+              icon: const Icon(
+                Icons.favorite_border,
+                color: Colors.grey,
+              ),
               onPressed: () {},
             ),
             IconButton(
@@ -80,11 +84,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   backgroundColor: AppTheme.backgroundColor,
-      //   child: const Icon(Icons.chat),
-      // ),
     );
   }
 }

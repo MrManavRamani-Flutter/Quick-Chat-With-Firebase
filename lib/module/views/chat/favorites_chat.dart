@@ -10,7 +10,7 @@ class FavoritesScreen extends StatelessWidget {
         title: const Text('Favorites'),
       ),
       body: const Center(
-        child: Text("Favorites Page"),
+        child: Text("Coming Soon"),
       ),
     );
   }
