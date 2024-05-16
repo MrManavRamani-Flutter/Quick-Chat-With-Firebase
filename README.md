@@ -6,7 +6,7 @@ A new Flutter project.
 
 | Welcome Screen | Home Screen | Chat Screen (Loading) | Chat Screen |
 | --- | --- | --- | --- |
-| <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/raw/main/assets/148671843/d81b2342-ccbb-457f-be3b-744a6a43b7a4.png" alt="Welcome Screen" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/raw/main/assets/148671843/1ab80c66-9929-4fe7-90fb-a2d746ecaca0.png" alt="Home Screen" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/raw/main/assets/148671843/d53d6e1f-dc19-42e3-a342-aca828a92041.png" alt="Chat Screen (Loading)" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/raw/main/assets/148671843/f3746971-aa44-4d70-8d84-5cf387b7c985.png" alt="Chat Screen" width="200" height="400"> |
+| <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/raw/main/assets/148671843/d81b2342-ccbb-457f-be3b-744a6a43b7a4" alt="Welcome Screen" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/raw/main/assets/148671843/1ab80c66-9929-4fe7-90fb-a2d746ecaca0" alt="Home Screen" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/raw/main/assets/148671843/d53d6e1f-dc19-42e3-a342-aca828a92041" alt="Chat Screen (Loading)" width="200" height="400"> | <img src="https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/raw/main/assets/148671843/f3746971-aa44-4d70-8d84-5cf387b7c985" alt="Chat Screen" width="200" height="400"> |
 
 | Send Pic Preview | User Profile | User Posts View | Search Screen |
 | --- | --- | --- | --- |
