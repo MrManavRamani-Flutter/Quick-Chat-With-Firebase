@@ -6,14 +6,13 @@ import 'package:quick_chat/module/views/profile/user_profile_screen.dart';
 class SearchScreen extends StatefulWidget {
   final String currentUserEmail;
 
-  const SearchScreen({Key? key, required this.currentUserEmail})
-      : super(key: key);
+  const SearchScreen({super.key, required this.currentUserEmail});
 
   @override
-  _SearchScreenState createState() => _SearchScreenState();
+  SearchScreenState createState() => SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<UserData> _searchResults = [];
   bool _isLoading = false;

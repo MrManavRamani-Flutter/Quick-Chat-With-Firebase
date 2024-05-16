@@ -5,7 +5,6 @@ import 'package:quick_chat/module/views/screens/home_screen.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }

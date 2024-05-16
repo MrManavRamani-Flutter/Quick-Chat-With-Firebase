@@ -80,11 +80,11 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: AppTheme.backgroundColor,
-        child: const Icon(Icons.chat),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {},
+      //   backgroundColor: AppTheme.backgroundColor,
+      //   child: const Icon(Icons.chat),
+      // ),
     );
   }
 }
