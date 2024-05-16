@@ -3,7 +3,7 @@ import 'package:quick_chat/helpers/firebase_helper.dart';
 import 'package:quick_chat/module/views/profile/profile_setup_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();

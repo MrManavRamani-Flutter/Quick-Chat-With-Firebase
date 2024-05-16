@@ -10,7 +10,7 @@ import 'package:quick_chat/module/views/profile/profile_screen.dart';
 class ProfileSetupScreen extends StatefulWidget {
   final String email;
 
-  const ProfileSetupScreen({Key? key, required this.email}) : super(key: key);
+  const ProfileSetupScreen({super.key, required this.email});
 
   @override
   ProfileSetupScreenState createState() => ProfileSetupScreenState();
