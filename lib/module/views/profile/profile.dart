@@ -8,8 +8,6 @@ class ProfileDetail extends StatefulWidget {
   final String username;
   final String? bio;
   final String? imageUrl;
-  final int followers;
-  final int following;
   final String email;
 
   const ProfileDetail({
@@ -18,8 +16,6 @@ class ProfileDetail extends StatefulWidget {
     this.imageUrl,
     this.bio,
     required this.email,
-    this.followers = 0,
-    this.following = 0,
   });
 
   @override
@@ -27,6 +23,29 @@ class ProfileDetail extends StatefulWidget {
 }
 
 class ProfileDetailState extends State<ProfileDetail> {
+  int _postCount = 0;
+  int _friendsCount = 0; // New addition
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPostCount();
+    // Set friends count
+    _friendsCount =
+        0; // Set to 0 by default, you may update it based on your logic
+  }
+
+  Future<void> _fetchPostCount() async {
+    try {
+      int postCount = await FirebaseHelper.getPostCount(widget.email);
+      setState(() {
+        _postCount = postCount;
+      });
+    } catch (e) {
+      print('Failed to fetch post count: $e');
+    }
+  }
+
   Widget _buildStatColumn(String label, int value) {
     if (label == 'Posts') {
       return FutureBuilder<int>(
@@ -135,11 +154,10 @@ class ProfileDetailState extends State<ProfileDetail> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            _buildStatColumn('Posts', widget.followers),
+                            _buildStatColumn('Posts', _postCount),
                             const SizedBox(width: 20),
-                            _buildStatColumn('Followers', widget.following),
+                            _buildStatColumn('Friends', _friendsCount),
                             const SizedBox(width: 20),
-                            _buildStatColumn('Following', widget.following),
                           ],
                         ),
                       ],
