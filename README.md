@@ -2,6 +2,11 @@
 
 A new Flutter project.
 
+## Quick_chat Video :
+
+https://github.com/MrManavRamani-Flutter/Quick-Chat-With-Firebase/assets/148671843/697d0a70-987c-4c60-a003-408ccfddca96
+
+
 ## Quick_chat All Screenshots :
 
 | Welcome Screen | Home Screen | Chat Screen (Loading) | Chat Screen |
